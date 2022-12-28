@@ -72,7 +72,7 @@ const follow = (
 }
 
 const colors = [
-  new THREE.Color(0xa6d9f7).toArray(),
+  new THREE.Color(0x228cdb).toArray(),
   new THREE.Color(0xff4f79).toArray(),
 ]
 
