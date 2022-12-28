@@ -73,10 +73,15 @@ const follow = (
 
 const colors = [
   new THREE.Color(0xa6d9f7).toArray(),
-  new THREE.Color(0xff6f59).toArray(),
+  new THREE.Color(0xff4f79).toArray(),
 ]
 
 export default function Sketch() {
+  const ref = useRef<THREE.InstancedMesh>(null!)
+
+  const mousePos = useRef(new THREE.Vector2(0, 0))
+  const prevMousePos = useRef(new THREE.Vector2(0, 0))
+
   const { viewport } = useThree()
 
   const colorArray = useMemo(
@@ -86,11 +91,6 @@ export default function Sketch() {
       ),
     []
   )
-
-  const ref = useRef<THREE.InstancedMesh>(null!)
-
-  const mousePos = useRef(new THREE.Vector2(0, 0))
-  const prevMousePos = useRef(new THREE.Vector2(0, 0))
 
   const particles = useMemo(
     () =>
@@ -174,7 +174,7 @@ export default function Sketch() {
           args={[colorArray, 3]}
         />
       </cylinderGeometry>
-      <meshPhongMaterial vertexColors shininess={0} />
+      <meshPhongMaterial vertexColors />
     </instancedMesh>
   )
 }

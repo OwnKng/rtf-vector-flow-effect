@@ -13,7 +13,7 @@ export default function App() {
         }}
       >
         <ambientLight intensity={0.25} />
-        <pointLight position={[0, 0, 15]} castShadow />
+        <pointLight position={[0, 0, 15]} castShadow intensity={0.8} />
         <Sketch />
       </Canvas>
     </div>
