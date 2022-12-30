@@ -71,11 +71,6 @@ const follow = (
   applyForce(particle, force)
 }
 
-const colors = [
-  new THREE.Color(0x228cdb).toArray(),
-  new THREE.Color(0xff4f79).toArray(),
-]
-
 export default function Sketch() {
   const ref = useRef<THREE.InstancedMesh>(null!)
 
@@ -83,14 +78,6 @@ export default function Sketch() {
   const prevMousePos = useRef(new THREE.Vector2(0, 0))
 
   const { viewport } = useThree()
-
-  const colorArray = useMemo(
-    () =>
-      Float32Array.from(
-        new Array(COUNT).fill(0).flatMap((_, i) => colors[i % 2])
-      ),
-    []
-  )
 
   const particles = useMemo(
     () =>
@@ -142,8 +129,8 @@ export default function Sketch() {
         }
       }
 
-      updatePosition(p)
       follow(p, flowField, viewport.width / cols, viewport.height / rows)
+      updatePosition(p)
 
       p.scale = THREE.MathUtils.lerp(p.scale, 0, 0.05)
       p.lifespan -= delta
@@ -168,13 +155,8 @@ export default function Sketch() {
       position={[-viewport.width * 0.5, -viewport.height * 0.5, 0]}
       args={[undefined, undefined, COUNT]}
     >
-      <cylinderGeometry args={[0.0, 1, 1, 3, 1]}>
-        <instancedBufferAttribute
-          attach='attributes-color'
-          args={[colorArray, 3]}
-        />
-      </cylinderGeometry>
-      <meshPhongMaterial vertexColors />
+      <cylinderGeometry args={[0.0, 1, 1, 3, 1]} />
+      <meshPhongMaterial color={0x228cdb} />
     </instancedMesh>
   )
 }
